@@ -8,8 +8,14 @@
     <ItemGroup>
         <Compile Include="day-one.fs" />
         <Compile Include="Program.fs" />
-        <Content Include="test-input-1.txt" />
-        <Content Include="prob-input-1.txt" />
+        <Content Include="Data\test-input-1.txt" />
+        <Content Include="Data\prob-input-1.txt" />
+        <Content Include="Data\test-input-1-2.txt" />
+        <Content Include="Data\prob-input-1-2.txt" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="FSharpPlus" Version="1.2.2" />
     </ItemGroup>
 
 </Project>

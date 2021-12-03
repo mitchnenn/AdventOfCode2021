@@ -9,6 +9,7 @@
         <Compile Include="common.fs" />
         <Compile Include="day-one.fs" />
         <Compile Include="day-two.fs" />
+        <Compile Include="day-three.fs" />
         <Compile Include="Program.fs" />
         <Content Include="Data\test-input-1.txt" />
         <Content Include="Data\prob-input-1.txt" />
@@ -18,6 +19,8 @@
         <Content Include="Data\prob-input-2-1.txt" />
         <Content Include="Data\test-input-2-2.txt" />
         <Content Include="Data\prob-input-2-2.txt" />
+        <Content Include="Data\test-input-3-1.txt" />
+        <Content Include="Data\prob-input-3-1.txt" />
     </ItemGroup>
 
     <ItemGroup>

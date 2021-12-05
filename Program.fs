@@ -7,5 +7,5 @@ open day_four
 // For more information see https://aka.ms/fsharp-console-apps
 //runDayOne
 //runDayTwo
-runDayThree
-//runDayFour
+//runDayThree
+runDayFour

@@ -7,10 +7,12 @@
 
     <ItemGroup>
         <Compile Include="common.fs" />
+        <Compile Include="fparsec-helper.fs" />
         <Compile Include="day-one.fs" />
         <Compile Include="day-two.fs" />
         <Compile Include="day-three.fs" />
         <Compile Include="day-four.fs" />
+        <None Include="FParsec-Parsing.fsx" />
         <Compile Include="Program.fs" />
         <Content Include="Data\test-input-1.txt" />
         <Content Include="Data\prob-input-1.txt" />

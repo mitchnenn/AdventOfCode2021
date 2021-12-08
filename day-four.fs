@@ -33,8 +33,29 @@ let parseInput filename =
                  |> List.chunkBySize len
     draws, boards, len
 
-let findWinningBoard currentDraws boards len : int32 =
-    2
+let hasWinningCol currentDraws board : bool =
+    false
+    
+let hasWinningRow (currentDraws:int32 list) (board:int32 list list) : bool =
+    let sortedDraws = currentDraws |> List.sort
+    (board
+     |> List.where(fun br -> (br
+                              |> List.sort
+                              |> List.except sortedDraws
+                              |> List.length) = 0)
+     |> List.length) > 0
+
+let findWinningBoard currentDraws (boards:int32 list list list) len : int32 =
+    let rec loop boardIndex =
+        match boardIndex = (boards |> List.length) with
+        | true -> -1
+        | false ->
+            let winningColFound = hasWinningCol currentDraws boards.[boardIndex]
+            let winningRowFound = hasWinningRow currentDraws boards.[boardIndex]
+            match winningColFound || winningRowFound with
+            | true -> boardIndex
+            | false -> loop (boardIndex + 1)
+    loop 0
 
 let playBingo filename =
     let draws, boards, len = parseInput filename
@@ -44,7 +65,7 @@ let playBingo filename =
         | _ ->
             let currentDraws = draws |> List.take currentDrawNumber
             let winningIndex = findWinningBoard currentDraws boards len
-            match winningIndex <= 0 with
+            match winningIndex < 0 with
             | false -> (currentDraws, winningIndex)
             | true -> loop (currentDrawNumber + 1)
     let currentDraws, winningBoardIndex = loop len

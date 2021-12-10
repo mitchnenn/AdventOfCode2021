@@ -37,10 +37,10 @@ let getPositionWithAim (filename:string) =
     
 let runDayTwo =
     // Part 1.
-    //let testCommands = getPosition "test-input-2-1.txt"
-    //printfn $"%A{testCommands}"
-    //let probCommands = getPosition "prob-input-2-1.txt"
-    //printfn $"%A{probCommands}"
+    let testCommands = getPosition "test-input-2-1.txt"
+    printfn $"%A{testCommands}"
+    let probCommands = getPosition "prob-input-2-1.txt"
+    printfn $"%A{probCommands}"
     // Part 2.
     let testCommands2 = getPositionWithAim "test-input-2-2.txt"
     printfn $"%A{testCommands2}"

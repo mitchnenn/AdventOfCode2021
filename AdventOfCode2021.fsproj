@@ -25,6 +25,7 @@
         <Content Include="Data\test-input-3-1.txt" />
         <Content Include="Data\prob-input-3-1.txt" />
         <Content Include="Data\test-input-4-1.txt" />
+        <Content Include="Data\prob-input-4-2.txt" />
     </ItemGroup>
 
     <ItemGroup>

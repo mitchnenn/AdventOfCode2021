@@ -1,7 +1,6 @@
 module day_three
 
 open System
-open FSharpPlus.Control
 open common
 
 type Tally = {nbOnes:int; nbZeros:int}

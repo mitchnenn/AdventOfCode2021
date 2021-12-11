@@ -33,17 +33,29 @@ let parseInput filename =
                  |> List.chunkBySize len
     draws, boards, len
 
-let hasWinningCol currentDraws board : bool =
-    false
-    
-let hasWinningRow (currentDraws:int32 list) (board:int32 list list) : bool =
+let hasWinningNumbers currentDraws boardRowsOrColumns = 
     let sortedDraws = currentDraws |> List.sort
-    (board
+    (boardRowsOrColumns
      |> List.where(fun br -> (br
                               |> List.sort
                               |> List.except sortedDraws
                               |> List.length) = 0)
      |> List.length) > 0
+
+let hasWinningCol currentDraws (board:int32 list list) : bool =
+    let boardArray = array2D board
+    let len = boardArray |> Array2D.length2
+    let rec loop index acc =
+        match index = len with
+        | true -> acc |> List.rev
+        | false ->
+            let col : int32 list = boardArray[*,index] |> Array.toList
+            loop (index + 1) (col::acc)
+    loop 0 []
+    |> hasWinningNumbers currentDraws
+        
+let hasWinningRow (currentDraws:int32 list) (board:int32 list list) : bool =
+    hasWinningNumbers currentDraws board
 
 let findWinningBoard currentDraws (boards:int32 list list list) len : int32 =
     let rec loop boardIndex =
@@ -57,20 +69,32 @@ let findWinningBoard currentDraws (boards:int32 list list list) len : int32 =
             | false -> loop (boardIndex + 1)
     loop 0
 
+let calcScore (draws:int32 list) (board:int32 list list) : int32 =
+    let notPickedSum = board
+                       |> List.reduce(fun state i -> state @ i)
+                       |> List.except draws
+                       |> List.sum
+    (draws |> List.last) * notPickedSum
+
 let playBingo filename =
     let draws, boards, len = parseInput filename
-    let rec loop currentDrawNumber =
-        match currentDrawNumber with
-        | i when i = draws.Length + 1 -> ([], -1)
-        | _ ->
-            let currentDraws = draws |> List.take currentDrawNumber
+    let rec loop drawIndex =
+        match drawIndex = (draws |> List.length) with
+        | true -> ([], -1)
+        | false ->
+            let currentDraws = draws.[0..drawIndex]
             let winningIndex = findWinningBoard currentDraws boards len
             match winningIndex < 0 with
             | false -> (currentDraws, winningIndex)
-            | true -> loop (currentDrawNumber + 1)
-    let currentDraws, winningBoardIndex = loop len
-    currentDraws,winningBoardIndex
+            | true -> loop (drawIndex + 1)
+    let currentDraws, winningBoardIndex = loop (len - 1)
+    calcScore currentDraws boards.[winningBoardIndex]
 
 let runDayFour =
-    let result = playBingo "test-input-4-1.txt"
-    printfn $"%A{result}"
+    // Part 1.
+    let testInputResult = playBingo "test-input-4-1.txt"
+    printfn $"%A{testInputResult}"
+    let probInputResult = playBingo "prob-input-4-2.txt"
+    printfn $"%A{probInputResult}"
+    // Part 2.
+    

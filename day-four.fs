@@ -76,8 +76,7 @@ let calcScore (draws:int32 list) (board:int32 list list) : int32 =
                        |> List.sum
     (draws |> List.last) * notPickedSum
 
-let playBingo filename =
-    let draws, boards, len = parseInput filename
+let playBingo draws boards len =
     let rec loop drawIndex =
         match drawIndex = (draws |> List.length) with
         | true -> ([], -1)
@@ -87,14 +86,41 @@ let playBingo filename =
             match winningIndex < 0 with
             | false -> (currentDraws, winningIndex)
             | true -> loop (drawIndex + 1)
-    let currentDraws, winningBoardIndex = loop (len - 1)
+    loop (len - 1)
+
+let getFirstWinningBoard filename = 
+    let draws, boards, len = parseInput filename
+    let currentDraws, winningBoardIndex = playBingo draws boards len
     calcScore currentDraws boards.[winningBoardIndex]
 
+let getLastWinningBoard filename = 
+    let draws, boards, len = parseInput filename
+    let indexedBoards = boards |> List.indexed
+    let numberOfBoards = boards |> List.length
+    let rec loop (loopCounter:int32) (winningBoards:int32 list) (lastWinner:int32 list * int32) =
+        let loosingBoards = indexedBoards
+                            |> List.filter(fun (i,_) -> not <| (winningBoards |> List.contains i))
+        match loopCounter = numberOfBoards with
+        | true ->
+            let lastWinningDraws,lastWinningIndex = lastWinner
+            calcScore lastWinningDraws boards.[lastWinningIndex]
+        | false ->
+            let currentDraws, winningBoardIndex = playBingo draws (loosingBoards |> List.map snd) len
+            match winningBoardIndex < 0 with
+            | true -> loop (loopCounter + 1) winningBoards lastWinner
+            | false ->
+                let index = loosingBoards.[winningBoardIndex] |> fst
+                loop (loopCounter + 1) (index::winningBoards) (currentDraws, index)
+    loop 0 [] ([], -1)
+    
 let runDayFour =
     // Part 1.
-    let testInputResult = playBingo "test-input-4-1.txt"
+    let testInputResult = getFirstWinningBoard "test-input-4-1.txt"
     printfn $"%A{testInputResult}"
-    let probInputResult = playBingo "prob-input-4-2.txt"
+    let probInputResult = getFirstWinningBoard "prob-input-4-2.txt"
     printfn $"%A{probInputResult}"
     // Part 2.
-    
+    let testInputLastWinningBoard = getLastWinningBoard "test-input-4-1.txt"
+    printfn $"%A{testInputLastWinningBoard}"
+    let probInputLastWinningBoard = getLastWinningBoard "prob-input-4-2.txt"
+    printfn $"%A{probInputLastWinningBoard}"

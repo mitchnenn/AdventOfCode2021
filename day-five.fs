@@ -80,8 +80,9 @@ let runDayFive =
     // Part 1.
     let testSubmarineLines = parseInputFile "test-input-5-1.txt"
     let testPointsCoveredCount = getDangerPointCount testSubmarineLines
+    printfn $"%A{testPointsCoveredCount}"        
     let probSubmarineLines = parseInputFile "test-input-5-2.txt"
     let probPointsCoveredCount = getDangerPointCount probSubmarineLines
-    printf $"%A{probPointsCoveredCount}"        
+    printfn $"%A{probPointsCoveredCount}"        
     // Part 2.
     

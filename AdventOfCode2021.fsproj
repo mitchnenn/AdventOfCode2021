@@ -13,7 +13,7 @@
         <Compile Include="day-three.fs" />
         <Compile Include="day-four.fs" />
         <Compile Include="day-five.fs" />
-        <None Include="FParsec-Parsing.fsx" />
+        <Compile Include="day-six.fs" />
         <Compile Include="Program.fs" />
         <Content Include="Data\test-input-1.txt" />
         <Content Include="Data\prob-input-1.txt" />
@@ -29,6 +29,8 @@
         <Content Include="Data\prob-input-4-2.txt" />
         <Content Include="Data\test-input-5-1.txt" />
         <Content Include="Data\test-input-5-2.txt" />
+        <Content Include="Data\test-day-6-1.txt" />
+        <Content Include="Data\prob-day-6-2.txt" />
     </ItemGroup>
 
     <ItemGroup>

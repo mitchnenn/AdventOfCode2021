@@ -5,7 +5,7 @@ open System.Text
 open FParsec
 open fparsec_helper
 
-let drawParser : Parser<int list, unit> = sepEndBy pint32 (pstring ",") .>> spaces;;
+let drawParser : Parser<int list, unit> = sepEndBy pint32 (pstring ",") .>> spaces
 
 let parseDraws filename = 
     let drawReply = runParserOnFile drawParser () filename Encoding.UTF8

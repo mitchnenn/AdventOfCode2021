@@ -21,7 +21,8 @@ let fishCountToAdd fish =
     |> List.where(fun t -> t = 0)
     |> List.length
     
-let addNewFish fishToAdd =  List.append ((seq{for _ = 1 to fishToAdd do yield 8}) |> Seq.toList)
+let addNewFish fishToAdd fish =
+    fish @ ((seq{for _ = 1 to fishToAdd do yield 8}) |> Seq.toList)
 
 let resetFishTimers =  List.map(fun t -> if t < 0 then 6 else t)
 

@@ -3,18 +3,18 @@ module day_eight
 open FSharpPlus
 open common
 
-let Zero = "abcefg" |> String.toList
-let One = "cf" |> String.toList
-let Two = "acdeg" |> String.toList
-let Three = "acdfg" |> String.toList
-let Four = "bcdf" |> String.toList
-let Five = "abdfg" |> String.toList
-let Six = "abdefg" |> String.toList
-let Seven = "acf" |> String.toList
-let Eight = "abcdefg" |> String.toList
-let Nine = "abcdfg" |> String.toList
+let Zero = "abcefg" 
+let One = "cf" 
+let Two = "acdeg" 
+let Three = "acdfg" 
+let Four = "bcdf" 
+let Five = "abdfg" 
+let Six = "abdefg" 
+let Seven = "acf" 
+let Eight = "abcdefg" 
+let Nine = "abcdfg" 
 
-type Note = {pattern:char list list; output:char list list}
+type Note = {pattern:string list; output:string list}
 
 let signalIsNotDelimiter s = s <> "|"
 
@@ -23,18 +23,15 @@ let toNote (input:string) : Note =
     let signals = splitString
                   |> List.takeWhile signalIsNotDelimiter
                   |> List.map id
-                  |> List.map(fun i -> i |> String.toList)
     let output = splitString
                  |> List.skipWhile signalIsNotDelimiter
                  |> List.skip 1
                  |> List.map id
-                 |> List.map(fun i -> i |> String.toList)
     {pattern=signals; output=output}
                  
 let parseNotes filename : Note list = readLines filename |> List.map toNote
 
-let lenOneFourSevenEight =
-    [One |> List.length;Four |> List.length;Seven |> List.length; Eight |> List.length]
+let lenOneFourSevenEight = [One.Length;Four.Length;Seven.Length; Eight.Length]
     
 let countOneFourSevenEightInOutput (notes:Note list) =
     notes

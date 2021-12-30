@@ -35,8 +35,7 @@ let lenOneFourSevenEight = [One.Length;Four.Length;Seven.Length; Eight.Length]
     
 let countOneFourSevenEightInOutput (notes:Note list) =
     notes
-    |> List.map(fun n -> n.output)
-    |> List.reduce(fun state o -> state@o)
+    |> List.collect(fun n -> n.output)
     |> List.where(fun o -> lenOneFourSevenEight |> List.contains o.Length)
     |> List.length
     
@@ -50,3 +49,4 @@ let runDayEight =
     
     let probNotes = parseNotes "prob-day-8-1.txt"
     printfn "%i" (countOneFourSevenEightInOutput probNotes)
+

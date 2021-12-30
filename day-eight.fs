@@ -1,6 +1,7 @@
 module day_eight
 
 open FSharpPlus
+open common
 
 let Zero = "abcefg" |> String.toList
 let One = "cf" |> String.toList
@@ -12,8 +13,6 @@ let Six = "abdefg" |> String.toList
 let Seven = "acf" |> String.toList
 let Eight = "abcdefg" |> String.toList
 let Nine = "abcdfg" |> String.toList
-
-open common
 
 type Note = {pattern:char list list; output:char list list}
 
@@ -34,30 +33,23 @@ let toNote (input:string) : Note =
                  
 let parseNotes filename : Note list = readLines filename |> List.map toNote
 
-let findInPatternByLength n l = n.pattern |> List.find(fun s -> s.Length = l)
-
-let getEMap (input:(char * char) list) =
-    let missingMapValue = Eight
-                          |> List.except (input |> List.map snd)
-                          |> List.head
-    ['e', missingMapValue]
+let lenOneFourSevenEight =
+    [One |> List.length;Four |> List.length;Seven |> List.length; Eight |> List.length]
     
-let createSegMap note : (char * char) list =
-    let noteSevenMap = (findInPatternByLength note 3) |> List.zip Seven
-    let noteFourMap = (findInPatternByLength note 4) |> List.zip Four
-    let noteEight = findInPatternByLength note 7 
-    let noteEightMap = List.zip [noteEight; Eight]
-    let notedWoEMap = List.concat [noteSevenMap; noteFourMap; noteEightMap]
-                      |> List.distinctBy fst
-    notedWoEMap
-    |> List.append (getEMap notedWoEMap)
-    |> List.sortBy fst
-
+let countOneFourSevenEightInOutput (notes:Note list) =
+    notes
+    |> List.map(fun n -> n.output)
+    |> List.reduce(fun state o -> state@o)
+    |> List.where(fun o -> lenOneFourSevenEight |> List.contains o.Length)
+    |> List.length
+    
 let runDayEight =
-    //let notes = parseNotes "test-day-8-1.txt"
     let singleNote = ["acedgfb cdfbe gcdfa fbcad dab cefabd cdfgeb eafb cagedb ab | cdfeb fcadb cdfeb cdbaf"]
                      |> List.map toNote
-                     |> List.head
-                     
+    printfn "%i" (countOneFourSevenEightInOutput singleNote)
     
-    printfn "%A" ((createSegMap singleNote) |> List.sortBy snd)
+    let testNotes = parseNotes "test-day-8-1.txt"
+    printfn "%i" (countOneFourSevenEightInOutput testNotes)
+    
+    let probNotes = parseNotes "prob-day-8-1.txt"
+    printfn "%i" (countOneFourSevenEightInOutput probNotes)

@@ -53,4 +53,9 @@ let runDayNine =
                         |> getLowPoints
     printfn "%A" testLowPoints
     
+    let probLowPoints = readLines "prob-day-nine-1.txt"
+                        |> List.map(parseDigits)
+                        |> toDigitArray
+                        |> getLowPoints
+    printfn "%A" probLowPoints
     

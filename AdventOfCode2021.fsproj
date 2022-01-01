@@ -16,6 +16,7 @@
         <Compile Include="day-six.fs" />
         <Compile Include="day-seven.fs" />
         <Compile Include="day-eight.fs" />
+        <Compile Include="day-nine.fs" />
         <Compile Include="Program.fs" />
         <Content Include="Data\test-input-1.txt" />
         <Content Include="Data\prob-input-1.txt" />
@@ -37,11 +38,13 @@
         <Content Include="Data\prob-day-7-1.txt" />
         <Content Include="Data\test-day-8-1.txt" />
         <Content Include="Data\prob-day-8-1.txt" />
+        <Content Include="Data\test-day-nine-1.txt" />
     </ItemGroup>
 
     <ItemGroup>
       <PackageReference Include="FParsec" Version="1.1.1" />
       <PackageReference Include="FSharpPlus" Version="1.2.2" />
+      <PackageReference Include="Unquote" Version="6.1.0" />
     </ItemGroup>
 
 </Project>

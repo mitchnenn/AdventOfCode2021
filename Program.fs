@@ -8,6 +8,7 @@ open day_six
 open day_seven
 open day_eight
 open day_nine
+open day_ten
 
 // For more information see https://aka.ms/fsharp-console-apps
 //runDayOne
@@ -18,4 +19,5 @@ open day_nine
 //runDaySix
 //runDaySeven
 //runDayEight
-runDayNine
+//runDayNine
+runDayTen

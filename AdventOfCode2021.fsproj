@@ -18,6 +18,7 @@
         <Compile Include="day-eight.fs" />
         <Compile Include="day-nine.fs" />
         <Compile Include="day-ten.fs" />
+        <Compile Include="day-eleven.fs" />
         <Compile Include="Program.fs" />
         <Content Include="Data\test-input-1.txt" />
         <Content Include="Data\prob-input-1.txt" />

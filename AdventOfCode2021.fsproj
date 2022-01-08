@@ -44,6 +44,7 @@
         <Content Include="Data\prob-day-nine-1.txt" />
         <Content Include="Data\test-day-ten-1.txt" />
         <Content Include="Data\prob-day-ten-1.txt" />
+        <Content Include="Data\test-day-eleven-1.txt" />
     </ItemGroup>
 
     <ItemGroup>
